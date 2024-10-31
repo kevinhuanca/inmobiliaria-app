@@ -16,6 +16,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public class ApiClient {
 
@@ -59,6 +60,26 @@ public class ApiClient {
 
         @GET("propietarios/perfil")
         Call<Propietario> perfil(@Header("Authorization") String token);
+
+        @FormUrlEncoded
+        @PUT("propietarios/modificar")
+        Call<String> modificar(
+                @Header("Authorization") String token,
+                @Field("Dni") String dni,
+                @Field("Nombre") String nombre,
+                @Field("Apellido") String apellido,
+                @Field("Telefono") String telefono,
+                @Field("Email") String email
+        );
+
+        @FormUrlEncoded
+        @PUT("propietarios/clave")
+        Call<String> clave(
+                @Header("Authorization") String token,
+                @Field("Actual") String actual,
+                @Field("Nueva") String nueva,
+                @Field("Repetida") String repetida
+        );
 
     }
 

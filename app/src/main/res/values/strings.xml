@@ -9,4 +9,5 @@
 
     <string name="menu_inicio">Inicio</string>
     <string name="menu_perfil">Perfil</string>
+    <string name="cambiar_clave">Cambiar Clave</string>
 </resources>
