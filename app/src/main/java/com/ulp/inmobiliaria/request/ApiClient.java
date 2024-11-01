@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ulp.inmobiliaria.model.Propietario;
 
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -15,8 +17,10 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 
 public class ApiClient {
 
@@ -56,10 +60,15 @@ public class ApiClient {
 
         @FormUrlEncoded
         @POST("propietarios/login")
-        Call<String> login(@Field("Email") String email, @Field("Clave") String clave);
+        Call<String> login(
+                @Field("Email") String email,
+                @Field("Clave") String clave
+        );
 
         @GET("propietarios/perfil")
-        Call<Propietario> perfil(@Header("Authorization") String token);
+        Call<Propietario> perfil(
+                @Header("Authorization") String token
+        );
 
         @FormUrlEncoded
         @PUT("propietarios/modificar")
@@ -80,6 +89,15 @@ public class ApiClient {
                 @Field("Nueva") String nueva,
                 @Field("Repetida") String repetida
         );
+
+        @Multipart
+        @PUT("propietarios/avatar")
+        Call<String> avatar(
+                @Header("Authorization") String token,
+                @Part MultipartBody.Part avatar
+        );
+
+
 
     }
 
