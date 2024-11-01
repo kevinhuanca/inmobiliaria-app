@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ulp.inmobiliaria.R;
 import com.ulp.inmobiliaria.databinding.FragmentPerfilBinding;
 import com.ulp.inmobiliaria.model.Propietario;
@@ -43,6 +45,11 @@ public class PerfilFragment extends Fragment {
                 binding.etApellido.setText(propietario.getApellido());
                 binding.etEmail.setText(propietario.getEmail());
                 binding.etTelefono.setText(propietario.getTelefono());
+                Glide.with(getContext())
+                        .load("http://192.168.0.14:5285/img/"+propietario.getAvatar())
+                        .placeholder(R.drawable.avatar_default)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(binding.ivAvatar);
             }
         });
 

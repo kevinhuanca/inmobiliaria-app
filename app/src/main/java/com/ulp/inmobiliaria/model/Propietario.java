@@ -9,11 +9,12 @@ public class Propietario {
     private String telefono;
     private String email;
     private String clave;
+    private String avatar;
 
     public Propietario() {
     }
 
-    public Propietario(int id, String dni, String nombre, String apellido, String telefono, String email, String clave) {
+    public Propietario(int id, String dni, String nombre, String apellido, String telefono, String email, String clave, String avatar) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -21,6 +22,7 @@ public class Propietario {
         this.telefono = telefono;
         this.email = email;
         this.clave = clave;
+        this.avatar = avatar;
     }
 
     public int getId() {
@@ -79,4 +81,11 @@ public class Propietario {
         this.clave = clave;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 }
