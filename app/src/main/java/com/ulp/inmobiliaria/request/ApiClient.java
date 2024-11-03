@@ -97,7 +97,11 @@ public class ApiClient {
                 @Part MultipartBody.Part avatar
         );
 
-
+        @FormUrlEncoded
+        @POST("propietarios/email")
+        Call<String> email(
+                @Field("email") String email
+        );
 
     }
 

@@ -1,5 +1,6 @@
 package com.ulp.inmobiliaria.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -34,6 +35,14 @@ public class LoginActivity extends AppCompatActivity {
                         binding.etEmail.getText().toString(),
                         binding.etClave.getText().toString()
                 );
+            }
+        });
+
+        binding.btOlvideClave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplication(), OlvideClaveActivity.class);
+                startActivity(intent);
             }
         });
 
