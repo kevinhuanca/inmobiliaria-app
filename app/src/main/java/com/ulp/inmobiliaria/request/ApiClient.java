@@ -5,9 +5,13 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ulp.inmobiliaria.model.Inmueble;
 import com.ulp.inmobiliaria.model.Propietario;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -101,6 +105,31 @@ public class ApiClient {
         @POST("propietarios/email")
         Call<String> email(
                 @Field("email") String email
+        );
+
+        @GET("inmuebles/todos")
+        Call<List<Inmueble>> todos(
+                @Header("Authorization") String token
+        );
+
+        @FormUrlEncoded
+        @POST("inmuebles/agregar")
+        Call<String> agregar(
+                @Header("Authorization") String token,
+                @Field("Direccion") String direccion,
+                @Field("Ambientes") int ambientes,
+                @Field("Tipo") String tipo,
+                @Field("Uso") String uso,
+                @Field("Precio") int precio,
+                @Field("Disponible") boolean disponible
+        );
+
+        @Multipart
+        @PUT("inmuebles/imagen")
+        Call<String> imagen(
+                @Header("Authorization") String token,
+                @Part MultipartBody.Part imagen,
+                @Part("id") RequestBody id
         );
 
     }
