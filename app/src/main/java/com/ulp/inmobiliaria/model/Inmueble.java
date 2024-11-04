@@ -1,6 +1,8 @@
 package com.ulp.inmobiliaria.model;
 
-public class Inmueble {
+import java.io.Serializable;
+
+public class Inmueble implements Serializable {
 
     private int id;
     private String direccion;
