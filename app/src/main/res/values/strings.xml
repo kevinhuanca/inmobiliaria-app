@@ -12,4 +12,5 @@
     <string name="cambiar_clave">Cambiar Clave</string>
     <string name="menu_inmuebles">Inmuebles</string>
     <string name="agregar_inmueble">Agregar Inmueble</string>
+    <string name="detalle_inmueble">Detalle Inmueble</string>
 </resources>

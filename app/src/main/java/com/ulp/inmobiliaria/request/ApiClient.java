@@ -132,6 +132,13 @@ public class ApiClient {
                 @Part("id") RequestBody id
         );
 
+        @FormUrlEncoded
+        @PUT("inmuebles/disponible")
+        Call<String> disponible(
+                @Header("Authorization") String token,
+                @Field("id") int id
+        );
+
     }
 
 }
