@@ -48,6 +48,11 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
     }
 
     public void guardarInmueble(String direccion, String ambientes, String tipo, String uso, String precio) {
+        if (!mImagen.isInitialized()) {
+            Toast.makeText(context, "¡Elegi una imagen!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (direccion.isEmpty() || ambientes.isEmpty() || tipo.isEmpty() || uso.isEmpty() || precio.isEmpty()){
             Toast.makeText(context, "¡Hay campos vacios!", Toast.LENGTH_SHORT).show();
             return;
