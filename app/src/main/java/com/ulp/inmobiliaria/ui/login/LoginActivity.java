@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ulp.inmobiliaria.R;
@@ -43,6 +44,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), OlvideClaveActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        viewModel.getMCerrar().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean cerrar) {
+                if (cerrar != null && cerrar) {
+                    finish();
+                }
             }
         });
 

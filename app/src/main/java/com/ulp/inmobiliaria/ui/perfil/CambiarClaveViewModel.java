@@ -21,10 +21,34 @@ import retrofit2.Response;
 public class CambiarClaveViewModel extends AndroidViewModel {
 
     private Context context;
+    private MutableLiveData<String> mActual;
+    private MutableLiveData<String> mNueva;
+    private MutableLiveData<String> mRepetida;
 
     public CambiarClaveViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
+    }
+
+    public LiveData<String> getMActual() {
+        if (mActual == null) {
+            mActual = new MutableLiveData<>();
+        }
+        return mActual;
+    }
+
+    public LiveData<String> getMNueva() {
+        if (mNueva == null) {
+            mNueva = new MutableLiveData<>();
+        }
+        return mNueva;
+    }
+
+    public LiveData<String> getMRepetida() {
+        if (mRepetida == null) {
+            mRepetida = new MutableLiveData<>();
+        }
+        return mRepetida;
     }
 
     public void cambiarClave(String actual, String nueva, String repetida) {
@@ -43,6 +67,9 @@ public class CambiarClaveViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
+                    mActual.setValue("");
+                    mNueva.setValue("");
+                    mRepetida.setValue("");
                     Toast.makeText(context, response.body(), Toast.LENGTH_SHORT).show();
                 } else {
                     try {

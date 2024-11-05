@@ -110,6 +110,10 @@ public class PerfilViewModel extends AndroidViewModel {
     }
 
     public void cambiarAvatar() {
+        if (!mAvatar.isInitialized()) {
+            Toast.makeText(context, "No elegiste otro avatar!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Uri avatarUri = Uri.parse(mAvatar.getValue());
         try {

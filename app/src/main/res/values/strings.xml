@@ -18,4 +18,5 @@
     <string name="menu_contratos">Contratos</string>
     <string name="detalle_contrato">Detalle Contrato</string>
     <string name="pagos_contrato">Pagos Contrato</string>
+    <string name="menu_salir">Salir</string>
 </resources>

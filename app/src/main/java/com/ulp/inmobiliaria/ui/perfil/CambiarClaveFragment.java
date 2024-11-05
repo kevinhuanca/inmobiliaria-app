@@ -33,6 +33,27 @@ public class CambiarClaveFragment extends Fragment {
         binding = FragmentCambiarClaveBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        viewModel.getMActual().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.etActual.setText(s);
+            }
+        });
+
+        viewModel.getMNueva().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.etNueva.setText(s);
+            }
+        });
+
+        viewModel.getMRepetida().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                binding.etRepetida.setText(s);
+            }
+        });
+
         binding.btGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

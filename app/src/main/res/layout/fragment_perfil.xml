@@ -105,9 +105,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:backgroundTint="#3C3C3C"
-        android:text="Elegir Avatar"
+        android:text="Cambiar Avatar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.793"
+        app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
