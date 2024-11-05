@@ -13,4 +13,9 @@
     <string name="menu_inmuebles">Inmuebles</string>
     <string name="agregar_inmueble">Agregar Inmueble</string>
     <string name="detalle_inmueble">Detalle Inmueble</string>
+    <string name="menu_inquilinos">Inquilinos</string>
+    <string name="detalle_inquilino">Detalle Inquilino</string>
+    <string name="menu_contratos">Contratos</string>
+    <string name="detalle_contrato">Detalle Contrato</string>
+    <string name="pagos_contrato">Pagos Contrato</string>
 </resources>
