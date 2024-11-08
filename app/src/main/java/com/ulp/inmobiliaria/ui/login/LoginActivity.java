@@ -1,6 +1,10 @@
 package com.ulp.inmobiliaria.ui.login;
 
+import static android.Manifest.permission.CALL_PHONE;
+
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -29,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
 
+        solicitarPermisos();
+
         binding.btIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,5 +62,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        viewModel.obtenerLecturas();
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        viewModel.pararLecturas();
+    }
+
+    private void solicitarPermisos() {
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M
+                && checkSelfPermission(CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{CALL_PHONE},1000);
+        }
+    }
+
 }

@@ -34,6 +34,7 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
 
     private Context context;
     private MutableLiveData<String> mImagen;
+    private MutableLiveData<Boolean> mVolver;
 
     public AgregarInmuebleViewModel(@NonNull Application application) {
         super(application);
@@ -45,6 +46,13 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
             mImagen = new MutableLiveData<>();
         }
         return mImagen;
+    }
+
+    public LiveData<Boolean> getMVolver(){
+        if(mVolver == null){
+            mVolver = new MutableLiveData<>();
+        }
+        return mVolver;
     }
 
     public void guardarInmueble(String direccion, String ambientes, String tipo, String uso, String precio) {
@@ -69,6 +77,7 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     guardarImagen(Integer.parseInt(response.body()));
+                    mVolver.setValue(true);
                     Toast.makeText(context, "Inmueble agregado correctamente", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, "No se pudo guardar", Toast.LENGTH_SHORT).show();
