@@ -59,7 +59,7 @@ public class PerfilFragment extends Fragment {
                 binding.etEmail.setText(propietario.getEmail());
                 binding.etTelefono.setText(propietario.getTelefono());
                 Glide.with(getContext())
-                        .load("http://192.168.0.14:5285/img/"+propietario.getAvatar())
+                        .load("http://192.168.0.14:5285/av/"+propietario.getAvatar())
                         .placeholder(R.drawable.avatar_default)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(binding.ivAvatar);
@@ -70,6 +70,26 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onChanged(String s) {
                 binding.ivAvatar.setImageURI(Uri.parse(s));
+            }
+        });
+
+        viewModel.getMHabilitar().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean b) {
+                binding.etDni.setEnabled(b);
+                binding.etNombre.setEnabled(b);
+                binding.etApellido.setEnabled(b);
+                binding.etEmail.setEnabled(b);
+                binding.etTelefono.setEnabled(b);
+                binding.btGuardarPerfil.setVisibility(b?View.VISIBLE:View.INVISIBLE);
+                binding.btEditarPerfil.setVisibility(b?View.INVISIBLE:View.VISIBLE);
+            }
+        });
+
+        binding.btEditarPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.habilitarBotones();
             }
         });
 

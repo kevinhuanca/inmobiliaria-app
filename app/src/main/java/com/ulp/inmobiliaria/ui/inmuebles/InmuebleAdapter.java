@@ -38,7 +38,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolderInmueble holder, int position) {
         Inmueble inmueble = inmuebles.get(position);
         holder.tvDireccion.setText("Direccion:\n"+inmueble.getDireccion());
-        holder.tvTipo.setText("Tipo:\n"+inmueble.getTipo());
+        holder.tvTipo.setText("Disponible:\n"+(inmueble.isDisponible()?"Si":"No"));
         holder.tvPrecio.setText("Precio:\n$"+inmueble.getPrecio()+"");
         Glide.with(holder.itemView)
                 .load("http://192.168.0.14:5285/in/"+inmueble.getImagen())

@@ -43,6 +43,7 @@ public class AgregarInmuebleFragment extends Fragment {
         View root = binding.getRoot();
 
         abrirGaleria();
+        binding.ivImagen.setImageResource(R.drawable.image_default);
 
         viewModel.getMImagen().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

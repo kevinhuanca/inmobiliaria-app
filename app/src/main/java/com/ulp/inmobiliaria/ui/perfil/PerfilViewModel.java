@@ -38,6 +38,7 @@ public class PerfilViewModel extends AndroidViewModel {
     private Context context;
     private MutableLiveData<Propietario> mPropietario;
     private MutableLiveData<String> mAvatar;
+    private MutableLiveData<Boolean> mHabilitar;
 
     public PerfilViewModel(@NonNull Application application) {
         super(application);
@@ -56,6 +57,18 @@ public class PerfilViewModel extends AndroidViewModel {
             mAvatar = new MutableLiveData<>();
         }
         return mAvatar;
+    }
+
+    public LiveData<Boolean> getMHabilitar() {
+        if(mHabilitar == null){
+            mHabilitar = new MutableLiveData<>();
+            mHabilitar.setValue(false);
+        }
+        return mHabilitar;
+    }
+
+    public void habilitarBotones() {
+        mHabilitar.setValue(true);
     }
 
     public void datosPropietario() {
@@ -95,7 +108,8 @@ public class PerfilViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(context, response.body(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Datos guardados!", Toast.LENGTH_SHORT).show();
+                    mHabilitar.setValue(false);
                 } else {
                     Toast.makeText(context, "No se modifico", Toast.LENGTH_SHORT).show();
                 }

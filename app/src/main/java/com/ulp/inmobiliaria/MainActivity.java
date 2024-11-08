@@ -3,10 +3,15 @@ package com.ulp.inmobiliaria;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -15,6 +20,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ulp.inmobiliaria.databinding.ActivityMainBinding;
+import com.ulp.inmobiliaria.model.Propietario;
+import com.ulp.inmobiliaria.request.ApiClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,12 +53,61 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_inicio, R.id.nav_perfil, R.id.nav_inmuebles, R.id.nav_inquilinos, R.id.nav_contratos)
+                R.id.nav_inicio, R.id.nav_perfil, R.id.nav_inmuebles, R.id.nav_inquilinos, R.id.nav_contratos, R.id.nav_salir)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                View view = navigationView.getHeaderView(0);
+                ImageView avatar = view.findViewById(R.id.ivMenuAvatar);
+                TextView nombre = view.findViewById(R.id.tvMenuNombre);
+                TextView email = view.findViewById(R.id.tvMenuEmail);
+
+                ApiClient.InmobiliariaService api = ApiClient.getApiInmobiliaria();
+                Call<Propietario> llamada = api.perfil("Bearer "+ApiClient.getToken(getApplicationContext()));
+                llamada.enqueue(new Callback<Propietario>() {
+                    @Override
+                    public void onResponse(Call<Propietario> call, Response<Propietario> response) {
+                        if (response.isSuccessful()) {
+                            Propietario p = response.body();
+                            Glide.with(getApplicationContext())
+                                    .load("http://192.168.0.14:5285/av/"+p.getAvatar())
+                                    .placeholder(R.drawable.avatar_default)
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .circleCrop()
+                                    .into(avatar);
+                            nombre.setText(p.getNombre()+" "+p.getApellido());
+                            email.setText(p.getEmail());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Propietario> call, Throwable throwable) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
     }
 
     @Override
